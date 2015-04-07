@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 Jordy van Kuijk. All rights reserved.
 //
 
-${TEST_EXAMPLE}
+
