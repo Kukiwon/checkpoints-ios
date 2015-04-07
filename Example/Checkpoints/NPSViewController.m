@@ -7,6 +7,7 @@
 //
 
 #import "NPSViewController.h"
+#import <Checkpoints/NPSCheckpoints.h>
 
 @interface NPSViewController ()
 
@@ -18,6 +19,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+- (IBAction)passCheckPoint1:(id)sender {
+    [[NPSCheckpoints SDK] checkPoint:@"1"];
+}
+- (IBAction)logIn:(id)sender {
+    [[NPSCheckpoints SDK] checkPoint:@"3"];
+}
+- (IBAction)fetchData:(id)sender {
+    [[NPSCheckpoints SDK] checkPoint:@"2"];
+}
+- (IBAction)postData:(id)sender {
+    [[NPSCheckpoints SDK] checkPoint:@"4"];
 }
 
 - (void)didReceiveMemoryWarning

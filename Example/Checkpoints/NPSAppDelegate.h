@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Checkpoints/NPSCheckpoints.h>
 
 @interface NPSAppDelegate : UIResponder <UIApplicationDelegate>
 

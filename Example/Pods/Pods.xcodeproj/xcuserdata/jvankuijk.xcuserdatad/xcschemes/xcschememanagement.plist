@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Checkpoints.xcscheme</key>
+		<key>Pods-Checkpoints-Checkpoints-Checkpoints.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -15,6 +15,11 @@
 			<false/>
 		</dict>
 		<key>Pods-Checkpoints.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Tests-Checkpoints-Checkpoints.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2885C37B5B2B8F9A4F397BE4</key>
+		<key>1331592A4A0F3D7D1820B042</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73F806AD2FDBB1FD3EBA6DE0</key>
+		<key>2E0D7851051EED39497B7947</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>88341A6B6290ACCBD1002985</key>
+		<key>4CDD9EA9F9163A14D68D2B13</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>979CEF64165F722136161EF7</key>
+		<key>7D6D8912DEBC1B82C25498CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC3C9BB99C6364ED4C077430</key>
+		<key>80ACDB5D5E46F15F7F3AA643</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D84A4A1EDF23E610771C0165</key>
 		<dict>
 			<key>primary</key>
 			<true/>
