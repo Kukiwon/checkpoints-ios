@@ -10,7 +10,7 @@
 Pod::Spec.new do |s|
   s.name             = "Checkpoints"
   s.version          = "0.1.0"
-  s.summary          = "A short description of Checkpoints."
+  s.summary          = "This is the iOS SDK for Checkpoints, a simple but powerful debugging and testing tool."
   s.description      = <<-DESC
                        An optional longer description of Checkpoints
 
@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Jordy van Kuijk" => "jvankuijk@me.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/Checkpoints.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/Kukiwon/checkpoints-ios.git", :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/jvankuijk'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
