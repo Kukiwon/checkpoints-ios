@@ -1,0 +1,14 @@
+PODS:
+  - Checkpoints (0.1.0)
+
+DEPENDENCIES:
+  - Checkpoints (from `../`)
+
+EXTERNAL SOURCES:
+  Checkpoints:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Checkpoints: 862600bdbd4178d3900929e7bc11ef5ca31124f4
+
+COCOAPODS: 0.35.0

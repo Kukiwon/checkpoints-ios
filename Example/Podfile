@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'Checkpoints', :exclusive => true do
+  pod "Checkpoints", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "Checkpoints", :path => "../"
+
+  
+end
