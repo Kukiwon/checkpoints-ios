@@ -38,7 +38,7 @@
 - (void) initWithUsername: (NSString *) username andPassword: (NSString *) password andProjectId: (NSString *) projectId andSessionIdentifier:(NSString *)sessionIdentifier {
     
     // init
-    _project = [[Project alloc] init];
+    _project = [[LBModel alloc] init];
     _username = username;
     _password = password;
     [_project setValue:projectId forKey:@"_id"];
@@ -76,7 +76,7 @@
     [session saveWithSuccess:^{
         _session = session;
     } failure:^(NSError *error) {
-        NSLog(@"%@", checkpoint_not_found);
+        NSLog(@"%@", session_could_not_start);
     }];
 }
 
@@ -87,9 +87,8 @@
                                                                 @"checkPointId": identifier
                                                                 }];
     [checkPoint saveWithSuccess:^{
-        NSLog(@"saved checkPoint");
     } failure:^(NSError *error) {
-        NSLog(@"failed to save checkpoint");
+        NSLog(@"%@", checkpoint_not_found);
     }];
 }
 

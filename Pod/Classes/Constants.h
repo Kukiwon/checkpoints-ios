@@ -10,4 +10,5 @@
 
 extern NSString* const login_incorrect;
 extern NSString* const project_not_found;
+extern NSString* const session_could_not_start;
 extern NSString* const checkpoint_not_found;
