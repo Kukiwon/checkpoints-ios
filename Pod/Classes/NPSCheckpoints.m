@@ -7,7 +7,6 @@
 //
 
 #import "NPSCheckpoints.h"
-#import "Project.h"
 #import "Constants.h"
 
 @implementation NPSCheckpoints
