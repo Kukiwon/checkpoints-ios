@@ -19,6 +19,8 @@
 @property (nonatomic, strong) LBRESTAdapter* adapter;
 @property (nonatomic, strong) LBModel* project;
 @property (nonatomic, strong) LBModel* session;
+@property (nonatomic, strong) NSMutableArray *checkpointQueue;
+@property (nonatomic, retain) LBModelRepository *checkpointRepo;
 
 + (id) SDK;
 - (void) initWithUsername: (NSString *) username andPassword: (NSString *) password andProjectId: (NSString *) projectId andSessionIdentifier: (NSString *) sessionIdentifier;
@@ -26,5 +28,6 @@
 
 - (void) startSessionWithIdentifier: (NSString *) identifier;
 - (void) checkPoint: (NSString *) identifier;
+- (void) batchSendCheckpoints;
 
 @end

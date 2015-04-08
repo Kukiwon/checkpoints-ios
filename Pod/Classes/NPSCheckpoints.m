@@ -17,6 +17,8 @@
 @synthesize project = _project;
 @synthesize session = _session;
 @synthesize url = _url;
+@synthesize checkpointQueue = _checkpointQueue;
+@synthesize checkpointRepo = _checkpointRepo;
 
 // singleton pattern
 + (id)SDK {
@@ -31,6 +33,8 @@
 - (id) init {
     if(self = [super init]) {
         _url = @"http://localhost:3030/api";
+        _checkpointQueue = [[NSMutableArray alloc] initWithCapacity:10];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(batchSendCheckpoints) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -44,6 +48,7 @@
     [_project setValue:projectId forKey:@"_id"];
     
     _adapter = [LBRESTAdapter adapterWithURL:[NSURL URLWithString:_url]];
+    _checkpointRepo = [_adapter repositoryWithModelName:@"SessionCheckPoints"];
     
     LBUserRepository *userRepo = [LBUserRepository repositoryWithClassName:@"Developers"];
     userRepo.adapter = _adapter;
@@ -81,15 +86,30 @@
 }
 
 - (void)checkPoint:(NSString *)identifier {
-    LBModelRepository *checkPointRepo = [_adapter repositoryWithModelName:@"SessionCheckPoints"];
-    LBModel *checkPoint = [checkPointRepo modelWithDictionary:@{
-                                                                @"sessionId" : _session._id,
-                                                                @"checkPointId": identifier
-                                                                }];
-    [checkPoint saveWithSuccess:^{
-    } failure:^(NSError *error) {
-        NSLog(@"%@", checkpoint_not_found);
-    }];
+    [_checkpointQueue addObject:identifier];
+}
+
+- (void) batchSendCheckpoints {
+    
+    if(_project == nil || _username == nil || _password == nil) {
+        return;
+    }
+    
+    for (int i = 0; i < 10 && i < _checkpointQueue.count; i++) {
+        NSString *identifier = [_checkpointQueue objectAtIndex:i];
+        if(_checkpointRepo != nil && _project != nil && identifier != nil && ![identifier isEqualToString:@""]) {
+            LBModel *checkPoint = [_checkpointRepo modelWithDictionary:@{
+                                                                        @"sessionId" : _session._id,
+                                                                        @"checkPointId": identifier
+                                                                        }];
+            [checkPoint saveWithSuccess:^{
+                [_checkpointQueue removeObjectAtIndex: [_checkpointQueue indexOfObject:identifier]];
+            } failure:^(NSError *error) {
+                NSLog(@"%@", checkpoint_not_found);
+                [_checkpointQueue removeObjectAtIndex: [_checkpointQueue indexOfObject:identifier]];
+            }];
+        }
+    }
 }
 
 
