@@ -12,11 +12,9 @@ Pod::Spec.new do |s|
   s.version          = "0.1.0"
   s.summary          = "This is the iOS SDK for Checkpoints, a simple but powerful debugging and testing tool."
   s.description      = <<-DESC
-                       An optional longer description of Checkpoints
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
-                       DESC
+                        Checkpoints allows you to place 'checkpoints' within your app. Doing so, you can track your application flow on user-level. Once you set up the SDK, you can access session- and checkpoint data and insights inside the Checkpoint control panel.
+			For more info, check: https://github.com/Kukiwon/checkpoints
+			DESC
   s.homepage         = "https://github.com/kukiwon/checkpoints-ios"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
