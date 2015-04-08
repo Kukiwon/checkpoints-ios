@@ -1,0 +1,28 @@
+{
+  "name": "Checkpoints",
+  "version": "0.1.0",
+  "summary": "This is the iOS SDK for Checkpoints, a simple but powerful debugging and testing tool.",
+  "description": "                       An optional longer description of Checkpoints\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/kukiwon/checkpoints-ios",
+  "license": "MIT",
+  "authors": {
+    "Jordy van Kuijk": "jvankuijk@me.com"
+  },
+  "source": {
+    "git": "https://github.com/Kukiwon/checkpoints-ios.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "ios": {
+    "vendored_frameworks": "LoopBack.framework"
+  },
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "Checkpoints": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}
