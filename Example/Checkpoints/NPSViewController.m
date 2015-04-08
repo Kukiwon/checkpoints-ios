@@ -24,10 +24,10 @@
     [[NPSCheckpoints SDK] checkPoint:@"1"];
 }
 - (IBAction)logIn:(id)sender {
-    [[NPSCheckpoints SDK] checkPoint:@"3"];
+    [[NPSCheckpoints SDK] checkPoint:@"2"];
 }
 - (IBAction)fetchData:(id)sender {
-    [[NPSCheckpoints SDK] checkPoint:@"2"];
+    [[NPSCheckpoints SDK] checkPoint:@"3"];
 }
 - (IBAction)postData:(id)sender {
     [[NPSCheckpoints SDK] checkPoint:@"4"];
