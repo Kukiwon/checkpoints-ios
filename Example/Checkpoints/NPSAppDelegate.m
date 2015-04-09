@@ -13,13 +13,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[NPSCheckpoints SDK] initWithUsername:@"jordy@foove.nl" andPassword:@"test123" andProjectId:@"1" andSessionIdentifier:@"iPhone Simulator" andUrl:@"http://checkpoints.elasticbeanstalk.com/api/"];
+    [[NPSCheckpoints SDK] initWithUsername:@"jordy@foove.nl" andPassword:@"test123" andProjectId:@"7" andSessionIdentifier:@"iPhone Simulator" andUrl:@"http://localhost:8081/api/"];
     
-    [[NPSCheckpoints SDK] checkPoint:@"9"];
-    [[NPSCheckpoints SDK] checkPoint:@"9"];
-    [[NPSCheckpoints SDK] checkPoint:@"9"];
-    [[NPSCheckpoints SDK] checkPoint:@"9"];
-    [[NPSCheckpoints SDK] checkPoint:@"9"];[[NPSCheckpoints SDK] checkPoint:@"9"];
+    [[NPSCheckpoints SDK] checkPoint:@"20"];
     return YES;
 }
 							

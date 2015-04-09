@@ -86,12 +86,13 @@
 }
 
 - (void)checkPoint:(NSString *)identifier {
-    [_checkpointQueue addObject:identifier];
+    if(_checkpointQueue != nil)
+        [_checkpointQueue addObject:identifier];
 }
 
 - (void) batchSendCheckpoints {
     
-    if(_project == nil || _username == nil || _password == nil) {
+    if(_project == nil || _username == nil || _password == nil || _checkpointQueue == nil || _checkpointRepo == nil) {
         return;
     }
     
