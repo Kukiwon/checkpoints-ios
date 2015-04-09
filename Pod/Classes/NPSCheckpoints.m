@@ -91,7 +91,7 @@
 
 - (void) batchSendCheckpoints {
     
-    if(_project == nil || _username == nil || _password == nil) {
+    if(_project == nil || _username == nil || _password == nil || _checkpointQueue == nil || _checkpointRepo == nil) {
         return;
     }
     
