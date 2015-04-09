@@ -32,7 +32,7 @@
 
 - (id) init {
     if(self = [super init]) {
-        _url = @"http://localhost:3030/api";
+        _url = @"http://localhost:8081/api";
         _checkpointQueue = [[NSMutableArray alloc] initWithCapacity:10];
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(batchSendCheckpoints) userInfo:nil repeats:YES];
     }
@@ -41,10 +41,20 @@
 
 - (void) initWithUsername: (NSString *) username andPassword: (NSString *) password andProjectId: (NSString *) projectId andSessionIdentifier:(NSString *)sessionIdentifier {
     
+    [self initWithUsername:username andPassword:password andProjectId:projectId andSessionIdentifier:sessionIdentifier andUrl:_url];
+}
+
+- (void) initWithUsername:(NSString *)username andPassword:(NSString *)password andProjectId:(NSString *)projectId andSessionIdentifier:(NSString *)sessionIdentifier andUrl:(NSString *)url {
+    [self initWithUsername:username andPassword:password andProjectId:projectId andSessionIdentifier:sessionIdentifier andUrl:url withSuccess:nil andFailure:nil];
+}
+
+- (void) initWithUsername:(NSString *)username andPassword:(NSString *)password andProjectId:(NSString *)projectId andSessionIdentifier:(NSString *)sessionIdentifier andUrl:(NSString *)url withSuccess:(LoginCallback)success andFailure:(LoginCallback)fail {
+
     // init
     _project = [[LBModel alloc] init];
     _username = username;
     _password = password;
+    _url = url;
     [_project setValue:projectId forKey:@"_id"];
     
     _adapter = [LBRESTAdapter adapterWithURL:[NSURL URLWithString:_url]];
@@ -58,30 +68,43 @@
         LBModelRepository *projectRepo = [_adapter repositoryWithModelName:@"Projects"];
         [projectRepo findById:_project._id success:^(LBModel *model) {
             _project = model;
-            [self startSessionWithIdentifier:sessionIdentifier];
+            [self startSessionWithIdentifier:sessionIdentifier withSuccess:^{
+                if(success != nil)
+                    success();
+            } andFail:^{
+                if(fail != nil)
+                    fail();
+            }];
         } failure:^(NSError *error) {
+            if(fail != nil)
+                fail();
             NSLog(@"%@", project_not_found);
         }];
     } failure:^(NSError *error) {
+        if(fail != nil)
+            fail();
         NSLog(@"%@", login_incorrect);
     }];
 }
 
-- (void) initWithUsername:(NSString *)username andPassword:(NSString *)password andProjectId:(NSString *)projectId andSessionIdentifier:(NSString *)sessionIdentifier andUrl:(NSString *)url {
-    _url = url;
-    [self initWithUsername:username andPassword:password andProjectId:projectId andSessionIdentifier:sessionIdentifier];
+- (void) startSessionWithIdentifier:(NSString *)identifier {
+    [self startSessionWithIdentifier:identifier withSuccess:nil andFail:nil];
 }
 
-- (void) startSessionWithIdentifier:(NSString *)identifier {
+- (void) startSessionWithIdentifier:(NSString *)identifier withSuccess:(Callback)success andFail:(Callback)fail {
     LBModelRepository *sessionRepo = [_adapter repositoryWithModelName:@"Sessions"];
     LBModel *session = [sessionRepo modelWithDictionary:@{
-                                                           @"identifier": identifier,
-                                                           @"projectId": _project._id
-                                                           }];
+                                                          @"identifier": identifier,
+                                                          @"projectId": _project._id
+                                                          }];
     [session saveWithSuccess:^{
         _session = session;
+        if(success != nil)
+            success();
     } failure:^(NSError *error) {
         NSLog(@"%@", session_could_not_start);
+        if(fail != nil)
+            fail();
     }];
 }
 
