@@ -113,7 +113,7 @@
                                                                         @"sessionId" : _session._id,
                                                                         @"checkPointId": identifier,    @"created": created
                                                                         }];
-            [_checkpointQueue removeObject:checkPoint];
+            [_checkpointQueue removeObject:[_checkpointQueue objectAtIndex:i]];
             [checkPoint saveWithSuccess:^{
             } failure:^(NSError *error) {
                 NSLog(@"%@", checkpoint_not_found);
