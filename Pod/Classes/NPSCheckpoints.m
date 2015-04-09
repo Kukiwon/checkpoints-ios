@@ -114,9 +114,11 @@
         [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
         [dateFormatter setTimeZone: [NSTimeZone timeZoneWithName:@"UTC"]];
         NSString *sqlDate = [dateFormatter stringFromDate: [NSDate date]];
+        NSString *millis = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
         [_checkpointQueue addObject:@{
                                       @"identifier": identifier,
-                                      @"created": sqlDate
+                                      @"created": sqlDate,
+                                      @"millis": millis
                                       }];
     }
 }
@@ -131,10 +133,12 @@
         NSDictionary *checkPoint = [_checkpointQueue objectAtIndex:i];
         NSString *identifier = [checkPoint valueForKey:@"identifier"];
         NSString *created = [checkPoint valueForKey:@"created"];
+        NSString *millis = [checkPoint valueForKey:@"millis"];
         if(_checkpointRepo != nil && _project != nil && checkPoint != nil && identifier != nil && created != nil && _session != nil && _session._id != nil) {
             LBModel *checkPoint = [_checkpointRepo modelWithDictionary:@{
                                                                         @"sessionId" : _session._id,
-                                                                        @"checkPointId": identifier,    @"created": created
+                                                                        @"checkPointId": identifier,    @"created": created,
+                                                                        @"millis": millis
                                                                         }];
             [_checkpointQueue removeObject:[_checkpointQueue objectAtIndex:i]];
             [checkPoint saveWithSuccess:^{

@@ -13,7 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[NPSCheckpoints SDK] initWithUsername:@"jordy@foove.nl" andPassword:@"test123" andProjectId:@"7" andSessionIdentifier:@"iPhone Simulator" andUrl:@"http://checkpoints.elasticbeanstalk.com/api/" withSuccess:^{
+    [[NPSCheckpoints SDK] initWithUsername:@"jordy@foove.nl" andPassword:@"test123" andProjectId:@"7" andSessionIdentifier:@"iPhone Simulator" andUrl:@"http://localhost:8081/api/" withSuccess:^{
         NSLog(@"done");
     } andFailure:^{
         NSLog(@"fail");
