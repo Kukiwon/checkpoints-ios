@@ -86,8 +86,16 @@
 }
 
 - (void)checkPoint:(NSString *)identifier {
-    if(_checkpointQueue != nil)
-        [_checkpointQueue addObject:identifier];
+    if(_checkpointQueue != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+        [dateFormatter setTimeZone: [NSTimeZone timeZoneWithName:@"UTC"]];
+        NSString *sqlDate = [dateFormatter stringFromDate: [NSDate date]];
+        [_checkpointQueue addObject:@{
+                                      @"identifier": identifier,
+                                      @"created": sqlDate
+                                      }];
+    }
 }
 
 - (void) batchSendCheckpoints {
@@ -97,17 +105,18 @@
     }
     
     for (int i = 0; i < 10 && i < _checkpointQueue.count; i++) {
-        NSString *identifier = [_checkpointQueue objectAtIndex:i];
-        if(_checkpointRepo != nil && _project != nil && identifier != nil && ![identifier isEqualToString:@""]) {
+        NSDictionary *checkPoint = [_checkpointQueue objectAtIndex:i];
+        NSString *identifier = [checkPoint valueForKey:@"identifier"];
+        NSString *created = [checkPoint valueForKey:@"created"];
+        if(_checkpointRepo != nil && _project != nil && checkPoint != nil && identifier != nil && created != nil && _session != nil && _session._id != nil) {
             LBModel *checkPoint = [_checkpointRepo modelWithDictionary:@{
                                                                         @"sessionId" : _session._id,
-                                                                        @"checkPointId": identifier
+                                                                        @"checkPointId": identifier,    @"created": created
                                                                         }];
+            [_checkpointQueue removeObject:checkPoint];
             [checkPoint saveWithSuccess:^{
-                [_checkpointQueue removeObjectAtIndex: [_checkpointQueue indexOfObject:identifier]];
             } failure:^(NSError *error) {
                 NSLog(@"%@", checkpoint_not_found);
-                [_checkpointQueue removeObjectAtIndex: [_checkpointQueue indexOfObject:identifier]];
             }];
         }
     }
